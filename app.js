@@ -1,9 +1,22 @@
-function book(name,author,pages){
-    //constructor to create a new book
-    this.name=name;
-    this.author=author;
-    this.pages=pages;
-    this.id=crypto.randomUUID();
+class book{
+    constructor(name,author,pages){
+        this._name=name;
+        this._author=author;
+        this._pages=pages;
+        this._id=crypto.randomUUID();
+    }
+    get name(){
+        return this._name;
+    }
+    get author(){
+        return this._author;
+    }
+    get pages(){
+        return this._pages;
+    }
+    get id(){
+        return this._id;
+    }
 }
 function createCard(book){
     //function to create a book(card) in the DOM
@@ -14,7 +27,7 @@ function createCard(book){
     if(Object.hasOwn(book,i))
     {
         let item=document.createElement("li");
-        item.textContent=`${i}:${book[i]}`;
+        item.textContent=`${i.slice(1)}:${book[i]}`;
         new_book.append(item);
     }
     let btn=document.createElement("button");
