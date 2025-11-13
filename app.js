@@ -57,7 +57,7 @@ let books=[];
 let buttons=[]
 pushDefaultvalues();
 //create a section .Ask for input there while creating a form.
-// PS: form is not implemented as it was backend(data retrieval) and I had no idea lol,found out later and didn't bother changing the structure.
+// PS: form is not implemented as it was backend(data retrieval) and I had no idea lol,found out later and didn't bother changing the structure.    
 let sect=document.createElement("section");
 let form=document.createElement("form");
 form.name="book";form.method="post";
@@ -77,8 +77,21 @@ butn.type="submit";
 form.append(butn);
 sect.append(form)
 body.append(sect);
+//validation:name
+input_name.addEventListener('blur',(e)=>{
+    if(input_name.value.trim()==="")
+        input_name.setCustomValidity("Name cannot be empty!");
+    else
+        input_name.setCustomValidity("");
+    // input_name.reportValidity();
+})
 //button to create a new book.
 butn.addEventListener('click',(e)=>{
+
+if(!form.checkValidity()){
+    form.reportValidity();
+    return;
+}
 e.preventDefault();
 let new_book=new book(input_name.value,input_author.value,input_pages.value)
 books.push(new_book);
