@@ -88,6 +88,9 @@ input_name.addEventListener('blur',(e)=>{
 //button to create a new book.
 butn.addEventListener('click',(e)=>{
 
+
+if(input_name.value.length==0)
+    input_name.setCustomValidity("Provide book name");
 if(!form.checkValidity()){
     form.reportValidity();
     return;
