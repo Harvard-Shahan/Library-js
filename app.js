@@ -56,6 +56,23 @@ let body=container.parentNode;
 let books=[];
 let buttons=[]
 pushDefaultvalues();
+function performValidation(){
+if(input_name.value.length==0)
+    input_name.setCustomValidity("Provide book name");
+else
+    input_name.setCustomValidity("");
+if(input_author.value.length==0)
+    input_author.setCustomValidity("Provide author name ");
+else
+    input_author.setCustomValidity("");
+if(input_pages.value.length==0)
+    input_pages.setCustomValidity("Provide page numbers");
+else if(input_pages.value<0)
+    input_pages.setCustomValidity("Invalid value for page numbers");
+else
+    input_pages.setCustomValidity("");
+
+}
 //create a section .Ask for input there while creating a form.
 // PS: form is not implemented as it was backend(data retrieval) and I had no idea lol,found out later and didn't bother changing the structure.    
 let sect=document.createElement("section");
@@ -78,19 +95,21 @@ form.append(butn);
 sect.append(form)
 body.append(sect);
 //validation:name
-input_name.addEventListener('blur',(e)=>{
-    if(input_name.value.trim()==="")
-        input_name.setCustomValidity("Name cannot be empty!");
-    else
+input_name.addEventListener('input',(e)=>{
         input_name.setCustomValidity("");
+    // input_name.reportValidity();
+})
+input_author.addEventListener('input',(e)=>{
+        input_author.setCustomValidity("");
+    // input_name.reportValidity();
+})
+input_pages.addEventListener('input',(e)=>{
+        input_pages.setCustomValidity("");
     // input_name.reportValidity();
 })
 //button to create a new book.
 butn.addEventListener('click',(e)=>{
-
-
-if(input_name.value.length==0)
-    input_name.setCustomValidity("Provide book name");
+performValidation();
 if(!form.checkValidity()){
     form.reportValidity();
     return;
